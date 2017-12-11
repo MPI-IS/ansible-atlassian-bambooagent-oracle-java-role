@@ -57,7 +57,13 @@
       name: JavaHome
     register: java_home_windows
 
-  - name: Ensure that java is present on the PATH
+  # checking
+  - name: Get environment variables
+    win_path:
+      elements: []
+    register: path_elements
+
+  - name: Ensure that java is present on the PATH as first element
     win_path:
       elements:
       - '{{ java_home_windows.value }}\\bin'
